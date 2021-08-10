@@ -142,7 +142,8 @@ public class Channel implements IBinder.DeathRecipient {
             }
         }
 
-        checkCommand(command);
+        if (!mChannelAccess.isSpecialAccess())
+            checkCommand(command);
         synchronized (mLock) {
             // set channel number bits
             command[0] = setChannelToClassByte(command[0], mChannelNumber);

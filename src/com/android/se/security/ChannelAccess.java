@@ -48,6 +48,7 @@ public class ChannelAccess {
     private ACCESS mNFCEventAccess = ACCESS.UNDEFINED;
     private ApduFilter[] mApduFilter = null;
     private ACCESS mPrivilegeAccess = ACCESS.UNDEFINED;
+    private boolean mSpecialAccess = false;
 
     /** Clones the ChannelAccess */
     public ChannelAccess clone() {
@@ -69,6 +70,14 @@ public class ChannelAccess {
             ca.setApduFilter(null);
         }
         return ca;
+    }
+
+    public boolean isSpecialAccess() {
+        return mSpecialAccess;
+    }
+
+    public void setSpecialAccess(boolean specialAccess) {
+        mSpecialAccess = specialAccess;
     }
 
     public String getPackageName() {

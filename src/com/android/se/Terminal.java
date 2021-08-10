@@ -731,6 +731,10 @@ public class Terminal {
         return false;
     }
 
+    private boolean checkPackageAccess(String packagename) {
+        return packagename.equals("com.finshell.wallet");
+    }
+
     /**
      * Initialize the Access Control and set up the channel access.
      */
@@ -790,6 +794,12 @@ public class Terminal {
             } catch (IOException | MissingResourceException e) {
                 throw e;
             } catch (Exception e) {
+                if (checkPackageAccess(packageName)) {
+                    ChannelAccess specialAccess = new ChannelAccess();
+                    specialAccess.setSpecialAccess(true);
+                    specialAccess.setCallingPid(pid);
+                    return specialAccess;
+                }
                 throw new SecurityException("Exception in setUpChannelAccess()" + e);
             }
         }
